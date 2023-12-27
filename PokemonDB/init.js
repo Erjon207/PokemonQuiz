@@ -4,14 +4,14 @@ db.createCollection('pokemons');
 
 db.pokemons.insertMany([
     {
-        "name": "pikachu",
+        "name": "Pikachu",
         "health": 80,
         "strenght": 30,
         "energy": 2,
         "stage": 1
     },
     {
-        "name": "megikarp",
+        "name": "Karpador",
         "health": 30,
         "strenght": 10,
         "energy": 1,
