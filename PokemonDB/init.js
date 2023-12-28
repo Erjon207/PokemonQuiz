@@ -185,4 +185,291 @@ db.pokemons.insertMany([
         "energy": 3,
         "stage": 2
     },
+    {
+        "name": "Zekrom",
+        "health": 130,
+        "strenght": 80,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Ho-Oh",
+        "health": 130,
+        "strenght": 120,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Tepig",
+        "health": 80,
+        "strenght": 50,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Tropius",
+        "health": 100,
+        "strenght": 50,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Growlithe",
+        "health": 80,
+        "strenght": 30,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Wimpod",
+        "health": 70,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Elekid",
+        "health": 30,
+        "strenght": 30,
+        "energy": 0,
+        "stage": 1
+    },
+    {
+        "name": "Orthworm",
+        "health": 140,
+        "strenght": 90,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Cufant",
+        "health": 100,
+        "strenght": 80,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Furfrou",
+        "health": 90,
+        "strenght": 20,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Capsakid",
+        "health": 60,
+        "strenght": 10,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Pansage",
+        "health": 70,
+        "strenght": 30,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Charcadet",
+        "health": 70,
+        "strenght": 60,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "tatsugiri",
+        "health": 70,
+        "strenght": 20,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Voltorb",
+        "health": 60,
+        "strenght": 30,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Yamask",
+        "health": 70,
+        "strenght": 30,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Mankey",
+        "health": 60,
+        "strenght": 30,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Shellder",
+        "health": 70,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Hoopa",
+        "health": 130,
+        "strenght": 130,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Litwick",
+        "health": 50,
+        "strenght": 0,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Lampent",
+        "health": 80,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 2
+    },
+    {
+        "name": "Chandelure",
+        "health": 120,
+        "strenght": 80,
+        "energy": 2,
+        "stage": 3
+    },
+    {
+        "name": "Drifloon",
+        "health": 60,
+        "strenght": 10,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Drifblim",
+        "health": 100,
+        "strenght": 80,
+        "energy": 2,
+        "stage": 2
+    },
+    {
+        "name": "Ampharaos",
+        "health": 140,
+        "strenght": 80,
+        "energy": 3,
+        "stage": 3
+    },
+    {
+        "name": "Flaaffy",
+        "health": 90,
+        "strenght": 50,
+        "energy": 3,
+        "stage": 2
+    },
+    {
+        "name": "Mareep",
+        "health": 60,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Manectric",
+        "health": 90,
+        "strenght": 40,
+        "energy": 2,
+        "stage": 2
+    },
+    {
+        "name": "Electrike",
+        "health": 60,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Metagross",
+        "health": 150,
+        "strenght": 80,
+        "energy": 4,
+        "stage": 3
+    },
+    {
+        "name": "Metang",
+        "health": 90,
+        "strenght": 50,
+        "energy": 3,
+        "stage": 2
+    },
+    {
+        "name": "Beldum",
+        "health": 60,
+        "strenght": 30,
+        "energy": 3,
+        "stage": 1
+    },
+    {
+        "name": "Klink",
+        "health": 50,
+        "strenght": 20,
+        "energy": 1,
+        "stage": 1
+    },
+    {
+        "name": "Klang",
+        "health": 90,
+        "strenght": 80,
+        "energy": 3,
+        "stage": 2
+    },
+    {
+        "name": "Klinkklang",
+        "health": 160,
+        "strenght": 130,
+        "energy": 3,
+        "stage": 3
+    },
+    {
+        "name": "Mienshao",
+        "health": 90,
+        "strenght": 40,
+        "energy": 1,
+        "stage": 2
+    },
+    {
+        "name": "Mienfoo",
+        "health": 60,
+        "strenght": 30,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Hawlucha",
+        "health": 80,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Dratini",
+        "health": 50,
+        "strenght": 20,
+        "energy": 2,
+        "stage": 1
+    },
+    {
+        "name": "Dragonair",
+        "health": 80,
+        "strenght": 60,
+        "energy": 3,
+        "stage": 2
+    },
+    {
+        "name": "Dragonite",
+        "health": 150,
+        "strenght": 80,
+        "energy": 3,
+        "stage": 3
+    }
 ]);
