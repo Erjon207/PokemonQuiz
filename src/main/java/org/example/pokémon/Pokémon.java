@@ -4,7 +4,7 @@ public class Pokémon {
 
     private String name;
     private int health;
-    private int strenght;
+    private int strength;
     private int energy;
     private int stage;
 
@@ -27,12 +27,12 @@ public class Pokémon {
         this.health = health;
     }
 
-    public int getStrenght() {
-        return strenght;
+    public int getStrength() {
+        return strength;
     }
 
-    public void setStrenght(int strenght) {
-        this.strenght = strenght;
+    public void setStrength(int strenght) {
+        this.strength = strenght;
     }
 
     public int getEnergy() {
@@ -56,7 +56,7 @@ public class Pokémon {
         return "Pokémon{" +
                 "name=" + name +
                 ", health=" + health +
-                ", strenght=" + strenght +
+                ", strength=" + strength +
                 ", energy=" + energy +
                 ", stage=" + stage +
                 '}';
