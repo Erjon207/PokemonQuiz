@@ -2,7 +2,7 @@ package org.example.pokémon;
 
 public class Pokémon {
 
-    private int name;
+    private String name;
     private int health;
     private int strenght;
     private int energy;
@@ -11,11 +11,11 @@ public class Pokémon {
     public Pokémon() {
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
