@@ -1,19 +1,15 @@
 package org.example;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Aggregates;
 import org.bson.Document;
 import org.example.pokémon.Pokémon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-
-    // Datenbank-name
-    private static final String DATABASE_NAME = "mongodb";
-    // Collection-name
-    private static final String COLLECTION_NAME = "pokemons";
-
 
     public List<Pokémon> getAllPokemons() {
         // Alle pokemons werden in eine Liste hinzugefügt
@@ -22,18 +18,19 @@ public class Main {
         // Connection String
         String connectionString = "mongodb://root:1234@localhost:27017/?authSource=admin";
 
-        // Connecting to database
+        // Connecting to database & get collection
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
+            MongoDatabase database = mongoClient.getDatabase("mongodb");
+            MongoCollection<Document> collection = database.getCollection("pokemons");
 
-                // In der collection wird ein cursor erstellt welcher die collection durchläuft.
-            try (MongoCursor<Document> cursor = collection.find().iterator()) {
-                // Solange Pokemons in "pokemons" collection vorzufinden sind werden diese in ein Document(Json ähnliche Struktur) hinzugefügt.
-                while (cursor.hasNext()) {
-                    Document document = cursor.next();
-                    pokemons.add(documentToPokemon(document));
-                }
+            // Drei random Pokemons werden aus der collection gewählt.
+            var aggregation = Arrays.asList(Aggregates.sample(3));
+            var cursor = collection.aggregate(aggregation).iterator();
+
+            // Solange Pokemons in "pokemons" collection vorzufinden sind werden diese in ein Document(Json ähnliche Struktur) hinzugefügt.
+            while (cursor.hasNext()) {
+                Document document = cursor.next();
+                pokemons.add(documentToPokemon(document));
             }
         }
         return pokemons;
