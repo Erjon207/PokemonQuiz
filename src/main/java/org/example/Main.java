@@ -41,7 +41,7 @@ public class Main {
         Pokémon pokemon = new Pokémon();
         pokemon.setName(document.getString("name"));
         pokemon.setHealth(document.getInteger("health"));
-        pokemon.setStrenght(document.getInteger("strenght"));
+        pokemon.setStrength(document.getInteger("strength"));
         pokemon.setEnergy(document.getInteger("energy"));
         pokemon.setStage(document.getInteger("stage"));
         return pokemon;
@@ -56,8 +56,6 @@ public class Main {
             System.out.println(pokemon);
         }
 
-        //System.out.println("Chose your Category: ");
-        //System.out.println("Health ,Strength ,Evolution & Energy");
 
     }
 }
