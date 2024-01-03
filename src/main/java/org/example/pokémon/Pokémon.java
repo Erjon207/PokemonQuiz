@@ -31,8 +31,8 @@ public class Pokémon {
         return strength;
     }
 
-    public void setStrength(int strenght) {
-        this.strength = strenght;
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public int getEnergy() {
