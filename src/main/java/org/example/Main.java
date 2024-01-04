@@ -5,13 +5,8 @@ import com.mongodb.client.model.Aggregates;
 import org.bson.Document;
 import org.example.pokémon.Pokémon;
 
-
 import java.io.File;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static java.lang.Math.max;
 
 public class Main {
 
@@ -39,11 +34,32 @@ public class Main {
         List<Pokémon> pokemons = main.getAllPokemons(randomQuestion.getResult(), randomQuestion.getCategory());
 
         for (Pokémon pokemon : pokemons) {
-            System.out.println(pokemon.getName());
+            System.out.println(" - " + pokemon.getName());
         }
         System.out.println("___________________________________________");
 
+        //scanner.reset();
+        String playerSolution = scanner.nextLine();
 
+        getSolution(playerSolution, pokemons);
+    }
+
+    public static void getSolution(String playerSolution, List<Pokémon> pokemons) {
+        Collections.sort(pokemons, Comparator.comparingInt(Pokémon::getPoints).reversed());
+        Pokémon p = pokemons.get(pokemons.size() - 1);
+        String rightPokemon = p.getName();
+
+        if (Objects.equals(playerSolution, rightPokemon)) {
+            System.out.println("___________________________________________");
+            System.out.println("Korrekt");
+            System.out.println(" - " + rightPokemon);
+            System.out.println("___________________________________________");
+        } else {
+            System.out.println("___________________________________________");
+            System.out.println("Falsch");
+            System.out.println(" - " + rightPokemon);
+            System.out.println("___________________________________________");
+        }
     }
 
     public List<Pokémon> getAllPokemons(int value, String category) {
@@ -83,7 +99,6 @@ public class Main {
         }
         return pokemons;
     }
-
 
     private static int getPokemonPoints(Pokémon currentPokemon, int value, String category) {
         if ("Health".equals(category)) {

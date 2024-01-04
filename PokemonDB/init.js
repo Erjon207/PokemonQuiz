@@ -277,7 +277,7 @@ db.pokemons.insertMany([
         "stage": 1
     },
     {
-        "name": "tatsugiri",
+        "name": "Tatsugiri",
         "health": 70,
         "strength": 20,
         "energy": 1,
