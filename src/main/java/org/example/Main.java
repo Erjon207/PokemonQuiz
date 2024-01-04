@@ -4,6 +4,7 @@ import com.mongodb.client.*;
 import com.mongodb.client.model.Aggregates;
 import org.bson.Document;
 import org.example.pokémon.Pokémon;
+import org.example.pokémon.StatisticsDBConnector;
 
 import java.io.File;
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
 public class Main {
 
     static File coconut = new File("src/main/resources/img.png");
+    static int points;
 
     public static void main(String[] args) {
         if (!coconut.exists()) {
@@ -19,29 +21,53 @@ public class Main {
             }
         }
         Scanner scanner = new Scanner(System.in);
+        StatisticsDBConnector sdb = new StatisticsDBConnector();
 
-        makeQuestion();
+
+        System.out.println("___________________________________________");
+        System.out.println("Type in your username");
+        System.out.println("___________________________________________");
+
+        String name = scanner.nextLine();
+        long start = System.currentTimeMillis();
+
+        for (int x = 0; x < 5; x++) {
+            makeQuestion();
 
         String category = getAnswer(scanner);
         List question = getPokemonQuestion(category);
 
-        //Collections.shuffle(question);
-        Question randomQuestion = question.isEmpty() ? null : (Question) question.get(new Random().nextInt(question.size()));
-        System.out.println("___________________________________________");
-        System.out.println(randomQuestion.getQuestion());
+            //Collections.shuffle(question);
+            Question randomQuestion = question.isEmpty() ? null : (Question) question.get(new Random().nextInt(question.size()));
+            System.out.println("___________________________________________");
+            System.out.println(randomQuestion.getQuestion());
 
-        Main main = new Main();
-        List<Pokémon> pokemons = main.getAllPokemons(randomQuestion.getResult(), randomQuestion.getCategory());
+            Main main = new Main();
+            List<Pokémon> pokemons = main.getAllPokemons(randomQuestion.getResult(), randomQuestion.getCategory());
 
-        for (Pokémon pokemon : pokemons) {
-            System.out.println(" - " + pokemon.getName());
+            for (Pokémon pokemon : pokemons) {
+                System.out.println(" - " + pokemon.getName());
+            }
+            System.out.println("___________________________________________");
+
+            String playerSolution = scanner.nextLine();
+            getSolution(playerSolution, pokemons);
+
+            System.out.println("___________________________________________");
+            System.out.println("Do you want to continue?");
+            System.out.println("___________________________________________");
+
+
+            String userInput = scanner.nextLine();
+
+            if (userInput.equals("no")) {
+                System.out.println("Breaking the loop!");
+                break;
+            }
         }
-        System.out.println("___________________________________________");
-
-        //scanner.reset();
-        String playerSolution = scanner.nextLine();
-
-        getSolution(playerSolution, pokemons);
+        long finish = System.currentTimeMillis();
+        double time = (double) (finish - start) / 1000;
+        sdb.saveWinLog(name, points, time);
     }
 
     public static void getSolution(String playerSolution, List<Pokémon> pokemons) {
@@ -49,16 +75,13 @@ public class Main {
         Pokémon p = pokemons.get(pokemons.size() - 1);
         String rightPokemon = p.getName();
 
+        System.out.println("___________________________________________");
+        System.out.println(Objects.equals(playerSolution, rightPokemon));
+        System.out.println(" - " + rightPokemon);
+        System.out.println("___________________________________________");
+
         if (Objects.equals(playerSolution, rightPokemon)) {
-            System.out.println("___________________________________________");
-            System.out.println("Korrekt");
-            System.out.println(" - " + rightPokemon);
-            System.out.println("___________________________________________");
-        } else {
-            System.out.println("___________________________________________");
-            System.out.println("Falsch");
-            System.out.println(" - " + rightPokemon);
-            System.out.println("___________________________________________");
+            points++;
         }
     }
 
@@ -86,7 +109,7 @@ public class Main {
                     Document document = cursor.next();
                     Pokémon currentPokemon = documentToPokemon(document);
 
-                    currentPokemon.setPoints(Math.abs(value - getPokemonPoints(currentPokemon, value, category)));
+                    currentPokemon.setPoints(Math.abs(value - getPokemonPoints(currentPokemon, category)));
 
                     boolean isUnique = pokemons.stream().noneMatch(p -> p.getPoints() == currentPokemon.getPoints());
 
@@ -100,7 +123,7 @@ public class Main {
         return pokemons;
     }
 
-    private static int getPokemonPoints(Pokémon currentPokemon, int value, String category) {
+    private static int getPokemonPoints(Pokémon currentPokemon, String category) {
         if ("Health".equals(category)) {
             return currentPokemon.getHealth();
         } else if ("Strength".equals(category)) {
