@@ -8,6 +8,16 @@ public class Pokémon {
     private int energy;
     private int stage;
 
+    private int points;
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     public Pokémon() {
     }
 

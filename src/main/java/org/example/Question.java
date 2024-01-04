@@ -6,9 +6,20 @@ public class Question {
 
     int result;
 
-    public Question(String question, int result) {
+    String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Question(String question, int result, String category) {
         this.question = question;
         this.result = result;
+        this.category = category;
     }
 
     public String getQuestion() {
