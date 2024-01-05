@@ -1,7 +1,6 @@
-db = db.getSiblingDB('mongodb');
+db = db.getSiblingDB('Pokémons');
 
 db.createCollection('pokemons');
-db.createCollection('statistics');
 
 db.pokemons.insertMany([
     {

@@ -2,9 +2,10 @@ package org.example;
 
 import com.mongodb.client.*;
 import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Sorts;
 import org.bson.Document;
+import org.example.players.Player;
 import org.example.pokémon.Pokémon;
-import org.example.pokémon.StatisticsDBConnector;
 
 import java.io.File;
 import java.util.*;
@@ -23,7 +24,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         StatisticsDBConnector sdb = new StatisticsDBConnector();
 
-
         System.out.println("___________________________________________");
         System.out.println("Type in your username");
         System.out.println("___________________________________________");
@@ -34,8 +34,8 @@ public class Main {
         for (int x = 0; x < 5; x++) {
             makeQuestion();
 
-        String category = getAnswer(scanner);
-        List question = getPokemonQuestion(category);
+            String category = getAnswer(scanner);
+            List question = getPokemonQuestion(category);
 
             //Collections.shuffle(question);
             Question randomQuestion = question.isEmpty() ? null : (Question) question.get(new Random().nextInt(question.size()));
@@ -57,7 +57,6 @@ public class Main {
             System.out.println("Do you want to continue?");
             System.out.println("___________________________________________");
 
-
             String userInput = scanner.nextLine();
 
             if (userInput.equals("no")) {
@@ -68,6 +67,18 @@ public class Main {
         long finish = System.currentTimeMillis();
         double time = (double) (finish - start) / 1000;
         sdb.saveWinLog(name, points, time);
+
+        System.out.println("Gratulations " + name + "! You got " + points + " points in " + time + " seconds.");
+
+        System.out.println("___________________________________________");
+        System.out.println("Top Players:");
+
+        System.out.println("___________________________________________");
+        for (Player player : getTopPlayers()) {
+            System.out.println(player.getWinner() + ": " + player.getPoints() + " Points. Time:" + player.getTime() + " s");
+        }
+        System.out.println("___________________________________________");
+
     }
 
     public static void getSolution(String playerSolution, List<Pokémon> pokemons) {
@@ -85,6 +96,30 @@ public class Main {
         }
     }
 
+    public static List<Player> getTopPlayers() {
+        List<Player> players = new ArrayList<>();
+        String connectionString = "mongodb://root:1234@localhost:27017/?authSource=admin";
+
+        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            MongoDatabase database = mongoClient.getDatabase("statistics");
+            MongoCollection<Document> collection = database.getCollection("statistics");
+
+            var aggregation = Arrays.asList(
+                Aggregates.sort(Sorts.descending("points")),
+                Aggregates.limit(5)
+            );
+
+            var cursor = collection.aggregate(aggregation).iterator();
+
+            while (cursor.hasNext()) {
+                Document playerDocument = cursor.next();
+
+                players.add(documentToPlayer(playerDocument));
+            }
+        }
+        return players;
+    }
+
     public List<Pokémon> getAllPokemons(int value, String category) {
         // Alle pokemons werden in eine Liste hinzugefügt
         List<Pokémon> pokemons = new ArrayList<>();
@@ -94,7 +129,7 @@ public class Main {
 
         // Verbindung zur DB und dass abgreifen von der Collection
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
-            MongoDatabase database = mongoClient.getDatabase("mongodb");
+            MongoDatabase database = mongoClient.getDatabase("Pokémons");
             MongoCollection<Document> collection = database.getCollection("pokemons");
 
             for (int x = 0; x < 3;) { // Change the loop condition to x < 3
@@ -106,8 +141,8 @@ public class Main {
                 // Solange Pokemons in "pokemons" collection vorzufinden sind werden diese in ein Document(Json ähnliche Struktur) hinzugefügt.
                 while (cursor.hasNext() && x < 3) { // Check x < 3 here
 
-                    Document document = cursor.next();
-                    Pokémon currentPokemon = documentToPokemon(document);
+                    Document pokemonDocument = cursor.next();
+                    Pokémon currentPokemon = documentToPokemon(pokemonDocument);
 
                     currentPokemon.setPoints(Math.abs(value - getPokemonPoints(currentPokemon, category)));
 
@@ -144,6 +179,14 @@ public class Main {
         pokemon.setEnergy(document.getInteger("energy"));
         pokemon.setStage(document.getInteger("stage"));
         return pokemon;
+    }
+
+    private static Player documentToPlayer(Document document) {
+        Player player = new Player();
+        player.setWinner(document.getString("winner"));
+        player.setPoints(document.getInteger("points"));
+        player.setTime(document.getDouble("time"));
+        return player;
     }
 
     private static String getAnswer(Scanner scanner) {
