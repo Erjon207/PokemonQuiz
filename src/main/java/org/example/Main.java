@@ -54,12 +54,12 @@ public class Main {
             getSolution(playerSolution, pokemons);
 
             System.out.println("___________________________________________");
-            System.out.println("Do you want to continue?");
+            System.out.println("Do you want to stop?");
             System.out.println("___________________________________________");
 
             String userInput = scanner.nextLine();
 
-            if (userInput.equals("no")) {
+            if (userInput.equals("yes")) {
                 System.out.println("Breaking the loop!");
                 break;
             }
@@ -71,7 +71,7 @@ public class Main {
         System.out.println("Gratulations " + name + "! You got " + points + " points in " + time + " seconds.");
 
         System.out.println("___________________________________________");
-        System.out.println("Top Players:");
+        System.out.println("Highscore:");
 
         System.out.println("___________________________________________");
         for (Player player : getTopPlayers()) {
