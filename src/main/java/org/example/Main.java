@@ -24,9 +24,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         StatisticsDBConnector sdb = new StatisticsDBConnector();
 
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
         System.out.println("Type in your username");
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
 
         String name = scanner.nextLine();
         long start = System.currentTimeMillis();
@@ -39,7 +39,7 @@ public class Main {
 
             //Collections.shuffle(question);
             Question randomQuestion = question.isEmpty() ? null : (Question) question.get(new Random().nextInt(question.size()));
-            System.out.println("___________________________________________");
+            System.out.println("________________________________________________________");
             System.out.println(randomQuestion.getQuestion());
 
             Main main = new Main();
@@ -48,15 +48,15 @@ public class Main {
             for (Pokémon pokemon : pokemons) {
                 System.out.println(" - " + pokemon.getName());
             }
-            System.out.println("___________________________________________");
+            System.out.println("________________________________________________________");
 
             String playerSolution = scanner.nextLine();
             getSolution(playerSolution, pokemons);
 
             if (x != 4){
-                System.out.println("___________________________________________");
+                System.out.println("________________________________________________________");
                 System.out.println("Do you want to stop?");
-                System.out.println("___________________________________________");
+                System.out.println("________________________________________________________");
 
                 String userInput = scanner.nextLine();
 
@@ -72,14 +72,14 @@ public class Main {
 
         System.out.println("Gratulations " + name + "! You got " + points + " points in " + time + " seconds.");
 
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
         System.out.println("Highscore:");
 
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
         for (Player player : getTopPlayers()) {
             System.out.println(player.getWinner() + ": " + player.getPoints() + " Points. Time:" + player.getTime() + " s");
         }
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
 
     }
 
@@ -88,10 +88,10 @@ public class Main {
         Pokémon p = pokemons.get(pokemons.size() - 1);
         String rightPokemon = p.getName();
 
-        System.out.println("___________________________________________");
-        System.out.println(Objects.equals(playerSolution, rightPokemon));
+        System.out.println("________________________________________________________");
+        System.out.println(Objects.equals(playerSolution.toLowerCase(Locale.ROOT), rightPokemon.toLowerCase(Locale.ROOT)));
         System.out.println(" - " + rightPokemon);
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
 
         if (Objects.equals(playerSolution, rightPokemon)) {
             points++;
@@ -203,13 +203,13 @@ public class Main {
     }
 
     private static void makeQuestion() {
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
         System.out.println("Chose a Category:");
         System.out.println("- Health");
         System.out.println("- Strength");
         System.out.println("- Energy");
         System.out.println("- Stage");
-        System.out.println("___________________________________________");
+        System.out.println("________________________________________________________");
     }
 
     private static List<Question> getPokemonQuestion(String category) {
