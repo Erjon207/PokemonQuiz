@@ -89,11 +89,12 @@ public class Main {
         String rightPokemon = p.getName();
 
         System.out.println("________________________________________________________");
-        System.out.println(Objects.equals(playerSolution.toLowerCase(Locale.ROOT), rightPokemon.toLowerCase(Locale.ROOT)));
+        boolean equals = Objects.equals(playerSolution.toLowerCase(Locale.ROOT), rightPokemon.toLowerCase(Locale.ROOT));
+        System.out.println(equals);
         System.out.println(" - " + rightPokemon);
         System.out.println("________________________________________________________");
 
-        if (Objects.equals(playerSolution, rightPokemon)) {
+        if (equals) {
             points++;
         }
     }
