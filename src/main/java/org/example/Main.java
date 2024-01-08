@@ -107,7 +107,10 @@ public class Main {
             MongoCollection<Document> collection = database.getCollection("statistics");
 
             var aggregation = Arrays.asList(
-                    Aggregates.sort(Sorts.descending("points", String.valueOf(Sorts.ascending("time")))),
+                    Aggregates.sort(
+                            Sorts.orderBy(
+                                    Sorts.descending("points"),
+                                    Sorts.ascending("time"))),
                 Aggregates.limit(5)
             );
 
