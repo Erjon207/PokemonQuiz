@@ -53,15 +53,17 @@ public class Main {
             String playerSolution = scanner.nextLine();
             getSolution(playerSolution, pokemons);
 
-            System.out.println("___________________________________________");
-            System.out.println("Do you want to stop?");
-            System.out.println("___________________________________________");
+            if (x != 4){
+                System.out.println("___________________________________________");
+                System.out.println("Do you want to stop?");
+                System.out.println("___________________________________________");
 
-            String userInput = scanner.nextLine();
+                String userInput = scanner.nextLine();
 
-            if (userInput.equals("yes")) {
-                System.out.println("Breaking the loop!");
-                break;
+                if (userInput.equals("yes")) {
+                    System.out.println("Breaking the loop!");
+                    break;
+                }
             }
         }
         long finish = System.currentTimeMillis();
