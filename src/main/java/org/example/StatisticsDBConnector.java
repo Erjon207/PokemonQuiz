@@ -1,4 +1,4 @@
-package org.example.pokémon;
+package org.example;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
