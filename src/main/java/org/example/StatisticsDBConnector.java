@@ -12,7 +12,7 @@ import org.bson.Document;
 public class StatisticsDBConnector {
     public void saveWinLog(String winnerName, int points, double time){
         try (MongoClient mongoClient = MongoClients.create(
-                MongoClientSettings.builder().applyConnectionString(new ConnectionString("mongodb://root:1234@localhost:27017/?authSource=admin")).build()
+                MongoClientSettings.builder().applyConnectionString(new ConnectionString("mongodb+srv://root:1234@pokemonquiz.amd9zke.mongodb.net/?retryWrites=true&w=majority")).build()
         )) {
             MongoDatabase database = mongoClient.getDatabase("statistics");
             try {
