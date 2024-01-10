@@ -18,7 +18,7 @@ public class PokémonServiceImpl implements PokémonService {
         List<Pokémon> pokemons = new ArrayList<>();
 
         // Connection String
-        String connectionString = "mongodb://root:1234@localhost:27017/?authSource=admin";
+        String connectionString = "mongodb+srv://root:1234@pokemonquiz.amd9zke.mongodb.net/?retryWrites=true&w=majority";
 
         // Verbindung zur DB und dass abgreifen von der Collection
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
