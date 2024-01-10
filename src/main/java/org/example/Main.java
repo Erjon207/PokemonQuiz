@@ -15,7 +15,6 @@ import java.io.File;
 import java.util.*;
 
 public class Main {
-
     static File coconut = new File("src/main/resources/img.png");
     static int points;
     public static void main(String[] args) {

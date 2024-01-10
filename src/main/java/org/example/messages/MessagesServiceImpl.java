@@ -31,7 +31,7 @@ public class MessagesServiceImpl implements MessageService{
     }
 
     public int getSolution(Scanner scanner, List<Pokémon> pokemons, int points) {
-        String playerSolution = scanner.nextLine();
+        String playerSolution = getPlayerSolution(scanner, pokemons);
         Collections.sort(pokemons, Comparator.comparingInt(Pokémon::getWinningCondition).reversed()); //sorts the pokémon after their difference to the solution
         Pokémon p = pokemons.get(pokemons.size() - 1); //gets the first pokémon witch is the winner
         String rightPokemon = p.getName();
@@ -46,6 +46,23 @@ public class MessagesServiceImpl implements MessageService{
             points++;
         }
         return points;
+    }
+
+    public String getPlayerSolution(Scanner scanner, List<Pokémon> pokémons) {
+        String pokemon;
+        boolean check;
+        do {
+            check = false;
+            pokemon = scanner.nextLine().toLowerCase(Locale.ROOT);
+
+            for (Pokémon p : pokémons) {
+                if (pokemon.equals(p.getName().toLowerCase(Locale.ROOT))) {
+                    check = true;
+                    break;
+                }
+            }
+        } while (!check);
+        return pokemon;
     }
 
     public String getCategory(Scanner scanner) {
