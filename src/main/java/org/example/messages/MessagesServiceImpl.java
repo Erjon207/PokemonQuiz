@@ -30,18 +30,19 @@ public class MessagesServiceImpl implements MessageService{
         return answer;
     }
 
-    public int getSolution(String playerSolution, List<Pokémon> pokemons, int points) {
-        Collections.sort(pokemons, Comparator.comparingInt(Pokémon::getPoints).reversed());
-        Pokémon p = pokemons.get(pokemons.size() - 1);
+    public int getSolution(Scanner scanner, List<Pokémon> pokemons, int points) {
+        String playerSolution = scanner.nextLine();
+        Collections.sort(pokemons, Comparator.comparingInt(Pokémon::getPoints).reversed()); //sorts the pokémon after their difference to the solution
+        Pokémon p = pokemons.get(pokemons.size() - 1); //gets the first pokémon witch is the winner
         String rightPokemon = p.getName();
 
         System.out.println("________________________________________________________");
-        boolean equals = Objects.equals(playerSolution.toLowerCase(Locale.ROOT), rightPokemon.toLowerCase(Locale.ROOT));
+        boolean equals = Objects.equals(playerSolution.toLowerCase(Locale.ROOT), rightPokemon.toLowerCase(Locale.ROOT)); //check's if the player answer matches the solution
         System.out.println(equals);
         System.out.println(" - " + rightPokemon);
         System.out.println("________________________________________________________");
 
-        if (equals) {
+        if (equals) { //adds a points if player answer is correct
             points++;
         }
         return points;
@@ -49,7 +50,7 @@ public class MessagesServiceImpl implements MessageService{
 
     public String getCategory(Scanner scanner) {
         String category;
-        do {
+        do { //if the answer isn't one of the category's you have to choose again a category
             category = scanner.nextLine().toLowerCase(Locale.ROOT);
         } while (!(category.equals("health") || category.equals("strength") || category.equals("energy") || category.equals("stage")));
         return category;

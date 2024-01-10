@@ -27,55 +27,51 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         checkIfNut();
-        String name = messageService.getAnswerToQuestion("Type in your username", scanner);
+        String name = messageService.getAnswerToQuestion("Type in your username", scanner); //gets your name for the Score log
 
-        long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis(); //starts timer
+        playthrough(questionService, scanner, pokémonService, messageService); //goes through the quiz
 
-        playthrough(questionService, scanner, pokémonService, messageService);
-
-        long finish = System.currentTimeMillis();
+        long finish = System.currentTimeMillis(); //stops timer
         double time = (double) (finish - start) / 1000;
-        sdb.saveWinLog(name, points, time);
+        sdb.saveWinLog(name, points, time); //logs your result for the scoreboard
 
-        messageService.endOfGameMsg(name, time, points, playerService);
+        messageService.endOfGameMsg(name, time, points, playerService); //shows current result of the quiz to the player
+    }
+
+    private static void playthrough(QuestionService questionService, Scanner scanner, PokémonService pokémonService, MessageService messageService) {
+        for (int x = 0; x < 5; x++) {
+            questionService.makeQuestion(); //aks which Category we want to choose
+
+            String category = messageService.getCategory(scanner); //loops for the answer until the input is one of the category's
+
+            List<Question> question = questionService.getPokemonQuestion(category); //gets a list of question's for the chosen category
+            Question randomQuestion = question.isEmpty() ? null : question.get(new Random().nextInt(question.size())); //gets one question randomly
+
+            List<Pokémon> pokémons = questionService.getQuizQuestion(randomQuestion, pokémonService); //shows the question in the Terminal and 3 pokémon
+
+            points = messageService.getSolution(scanner, pokémons, points); //checks if the chosen pokémon is the right answer and adds points
+
+            if (stopQuiz(scanner, messageService, x)) break; //stops the quiz if the player chooses to
+        }
+    }
+
+    private static boolean stopQuiz(Scanner scanner, MessageService messageService, int x) {
+        if (x != 4){ // if it's the 5th time the game doesn't ask
+            String userInput = messageService.getAnswerToQuestion("Do you want to stop?", scanner);
+
+            if (userInput.equals("yes")) {
+                System.out.println("Breaking the loop!");
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void checkIfNut() {
         if (!coconut.exists()) {
             while(true) {
                 System.out.println("WHERE COCONUT !!!!!!!!??????????????????");
-            }
-        }
-    }
-    private static void playthrough(QuestionService questionService, Scanner scanner, PokémonService pokémonService, MessageService messageService) {
-        for (int x = 0; x < 5; x++) {
-            questionService.makeQuestion();
-
-            String category = messageService.getCategory(scanner);
-            List<Question> question = questionService.getPokemonQuestion(category);
-
-            //Collections.shuffle(question);
-            Question randomQuestion = question.isEmpty() ? null : (Question) question.get(new Random().nextInt(question.size()));
-            System.out.println("________________________________________________________");
-            System.out.println(randomQuestion.getQuestion());
-
-            List<Pokémon> pokemons = pokémonService.getAllPokemons(randomQuestion.getResult(), randomQuestion.getCategory());
-
-            for (Pokémon pokemon : pokemons) {
-                System.out.println(" - " + pokemon.getName());
-            }
-            System.out.println("________________________________________________________");
-
-            String playerSolution = scanner.nextLine();
-            points = messageService.getSolution(playerSolution, pokemons, points);
-
-            if (x != 4){
-                String userInput = messageService.getAnswerToQuestion("Do you want to stop?", scanner);
-
-                if (userInput.equals("yes")) {
-                    System.out.println("Breaking the loop!");
-                    break;
-                }
             }
         }
     }

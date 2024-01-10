@@ -12,7 +12,7 @@ public interface MessageService {
 
     String getAnswerToQuestion(String question, Scanner scanner);
 
-    int getSolution(String playerSolution, List<Pokémon> pokemons, int points);
+    int getSolution(Scanner scanner, List<Pokémon> pokemons, int points);
 
     String getCategory(Scanner scanner);
 }
