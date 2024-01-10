@@ -9,17 +9,17 @@ import java.util.Locale;
 
 public class QuestionServiceImpl implements QuestionService {
     public void makeQuestion() {
-        System.out.println("________________________________________________________");
+        System.out.println("___________________________________________________________________");
         System.out.println("Chose a Category:");
         System.out.println("- Health");
         System.out.println("- Strength");
         System.out.println("- Energy");
         System.out.println("- Stage");
-        System.out.println("________________________________________________________");
+        System.out.println("___________________________________________________________________");
     }
 
     public List<Pokémon> getQuizQuestion(Question randomQuestion, PokémonService pokémonService){
-        System.out.println("________________________________________________________");
+        System.out.println("___________________________________________________________________");
         System.out.println(randomQuestion.getQuestion());
 
         List<Pokémon> pokémons = pokémonService.getAllPokemons(randomQuestion.getResult(), randomQuestion.getCategory()); //takes 3 random pokémon from the DB
@@ -27,7 +27,7 @@ public class QuestionServiceImpl implements QuestionService {
         for (Pokémon pokémon : pokémons) {
             System.out.println(" - " + pokémon.getName());
         }
-        System.out.println("________________________________________________________");
+        System.out.println("___________________________________________________________________");
         return pokémons;
     }
 

@@ -10,7 +10,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 public class StatisticsDBConnector {
-    public void saveWinLog(String winnerName, int points, double time){
+    public void saveWinLog(String playerName, int points, double time){
         try (MongoClient mongoClient = MongoClients.create(
                 MongoClientSettings.builder().applyConnectionString(new ConnectionString("mongodb+srv://root:1234@pokemonquiz.amd9zke.mongodb.net/?retryWrites=true&w=majority")).build()
         )) {
@@ -18,7 +18,7 @@ public class StatisticsDBConnector {
             try {
                 MongoCollection<Document> carDocs = database.getCollection("statistics");
                 Document doc = new Document();
-                doc.append("winner", winnerName);
+                doc.append("name", playerName);
                 doc.append("points", points);
                 doc.append("time", time);
                 carDocs.insertOne(doc);

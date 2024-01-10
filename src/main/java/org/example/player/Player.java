@@ -1,24 +1,24 @@
 package org.example.player;
 
 public class Player {
-    String winner;
+    String playerName;
     int points;
     double time;
 
     public Player(String name, int points, double time) {
-        this.winner = name;
+        this.playerName = name;
         this.points = points;
         this.time = time;
     }
 
     public Player() {}
 
-    public String getWinner() {
-        return winner;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setWinner(String winner) {
-        this.winner = winner;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public int getPoints() {
@@ -40,7 +40,7 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "name='" + winner + '\'' +
+                "name='" + playerName + '\'' +
                 ", points=" + points +
                 ", time=" + time +
                 '}';

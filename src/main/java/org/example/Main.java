@@ -27,6 +27,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         checkIfNut();
+        messageService.getLogo();
         String name = messageService.getAnswerToQuestion("Type in your username", scanner); //gets your name for the Score log
 
         long start = System.currentTimeMillis(); //starts timer

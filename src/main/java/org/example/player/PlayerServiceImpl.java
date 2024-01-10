@@ -16,7 +16,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     public Player documentToPlayer(Document document) {
         Player player = new Player();
-        player.setWinner(document.getString("winner"));
+        player.setPlayerName(document.getString("name"));
         player.setPoints(document.getInteger("points"));
         player.setTime(document.getDouble("time"));
         return player;
@@ -24,7 +24,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     public List<Player> getTopPlayers() {
         List<Player> players = new ArrayList<>();
-        String connectionString = "mongodb://root:1234@localhost:27017/?authSource=admin";
+        String connectionString = "mongodb+srv://root:1234@pokemonquiz.amd9zke.mongodb.net/?retryWrites=true&w=majority";
 
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
             MongoDatabase database = mongoClient.getDatabase("statistics");
@@ -43,7 +43,7 @@ public class PlayerServiceImpl implements PlayerService {
             while (cursor.hasNext()) {
                 Document playerDocument = cursor.next();
 
-                players.add(documentToPlayer(playerDocument));
+                players.add(documentToPlayer(playerDocument)); // Converts BSON player to java
             }
         }
         return players;
