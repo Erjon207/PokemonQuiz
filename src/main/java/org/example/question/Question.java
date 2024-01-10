@@ -1,4 +1,4 @@
-package org.example;
+package org.example.question;
 
 public class Question {
 
@@ -8,13 +8,6 @@ public class Question {
 
     String category;
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public Question(String question, int result, String category) {
         this.question = question;
@@ -36,5 +29,13 @@ public class Question {
 
     public void setResult(int result) {
         this.result = result;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
