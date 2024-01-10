@@ -7,15 +7,14 @@ public class Pokémon {
     private int strength;
     private int energy;
     private int stage;
+    private int winningCondition;
 
-    private int points;
-
-    public int getPoints() {
-        return points;
+    public int getWinningCondition() {
+        return winningCondition;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setWinningCondition(int winningCondition) {
+        this.winningCondition = winningCondition;
     }
 
     public Pokémon() {

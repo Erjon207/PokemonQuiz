@@ -15,4 +15,6 @@ public interface MessageService {
     int getSolution(Scanner scanner, List<Pokémon> pokemons, int points);
 
     String getCategory(Scanner scanner);
+
+    void getLogo();
 }
