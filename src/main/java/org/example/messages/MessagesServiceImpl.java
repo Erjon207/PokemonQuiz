@@ -1,0 +1,57 @@
+package org.example.messages;
+
+import org.example.player.Player;
+import org.example.player.PlayerService;
+import org.example.pokémon.Pokémon;
+
+import java.util.*;
+
+public class MessagesServiceImpl implements MessageService{
+
+    public void endOfGameMsg(String name, double time, int points, PlayerService playerService) {
+        System.out.println("Congratulations " + name + "! You got " + points + " points in " + time + " seconds.");
+
+        System.out.println("________________________________________________________");
+        System.out.println("Highscores:");
+
+        System.out.println("________________________________________________________");
+        for (Player player : playerService.getTopPlayers()) {
+            System.out.println(player.getWinner() + ": " + player.getPoints() + " Points. Time:" + player.getTime() + " s");
+        }
+        System.out.println("________________________________________________________");
+    }
+
+    public String getAnswerToQuestion(String question, Scanner scanner) {
+        System.out.println("________________________________________________________");
+        System.out.println(question);
+        System.out.println("________________________________________________________");
+
+        String answer = scanner.nextLine();
+        return answer;
+    }
+
+    public int getSolution(String playerSolution, List<Pokémon> pokemons, int points) {
+        Collections.sort(pokemons, Comparator.comparingInt(Pokémon::getPoints).reversed());
+        Pokémon p = pokemons.get(pokemons.size() - 1);
+        String rightPokemon = p.getName();
+
+        System.out.println("________________________________________________________");
+        boolean equals = Objects.equals(playerSolution.toLowerCase(Locale.ROOT), rightPokemon.toLowerCase(Locale.ROOT));
+        System.out.println(equals);
+        System.out.println(" - " + rightPokemon);
+        System.out.println("________________________________________________________");
+
+        if (equals) {
+            points++;
+        }
+        return points;
+    }
+
+    public String getCategory(Scanner scanner) {
+        String category;
+        do {
+            category = scanner.nextLine().toLowerCase(Locale.ROOT);
+        } while (!(category.equals("health") || category.equals("strength") || category.equals("energy") || category.equals("stage")));
+        return category;
+    }
+}
