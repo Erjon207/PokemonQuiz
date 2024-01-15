@@ -6,7 +6,7 @@ import org.example.pokémon.Pokémon;
 
 import java.util.*;
 
-public class MessagesServiceImpl implements MessageService{
+public class MessagesServiceImpl implements MessagesService {
 
     public void endOfGameMsg(String name, double time, int points, PlayerService playerService) {
         System.out.println("Congratulations " + name + "! You got " + points + " points in " + time + " seconds.");

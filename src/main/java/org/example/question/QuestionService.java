@@ -20,4 +20,6 @@ public interface QuestionService {
     List<Question> getStrengthQuestion();
 
     List<Question> getHealthQuestion();
+
+    int getStageHighestValue();
 }

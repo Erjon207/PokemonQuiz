@@ -6,7 +6,7 @@ import org.example.pokémon.Pokémon;
 import java.util.List;
 import java.util.Scanner;
 
-public interface MessageService {
+public interface MessagesService {
 
     void endOfGameMsg(String name, double time, int points, PlayerService playerService);
 
