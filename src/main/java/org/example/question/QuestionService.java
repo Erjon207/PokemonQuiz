@@ -21,5 +21,5 @@ public interface QuestionService {
 
     List<Question> getHealthQuestion();
 
-    int getStageHighestValue();
+    int getDBValue(boolean maxOrMin, String category);
 }
