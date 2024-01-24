@@ -27,7 +27,7 @@ public class Main {
 
         checkIfNut();
         messagesService.getLogo();
-        String name = messagesService.getAnswerToQuestion("Type in your username", scanner); //gets your name for the Score log
+        String name = messagesService.getAnswerToQuestion("Type in your username or ScoreBoard too see the Highscores", scanner); //gets your name for the Score log
 
         long start = System.currentTimeMillis(); //starts timer
         playthrough(questionService, scanner, pokémonService, messagesService); //goes through the quiz

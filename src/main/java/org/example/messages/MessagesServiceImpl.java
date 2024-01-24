@@ -2,15 +2,22 @@ package org.example.messages;
 
 import org.example.player.Player;
 import org.example.player.PlayerService;
+import org.example.player.PlayerServiceImpl;
 import org.example.pokémon.Pokémon;
 
 import java.util.*;
+
+import static java.lang.System.exit;
 
 public class MessagesServiceImpl implements MessagesService {
 
     public void endOfGameMsg(String name, double time, int points, PlayerService playerService) {
         System.out.println("Congratulations " + name + "! You got " + points + " points in " + time + " seconds.");
 
+        getScoreBoard(playerService);
+    }
+
+    private static void getScoreBoard(PlayerService playerService) {
         System.out.println("___________________________________________________________________");
         System.out.println("Highscores:");
 
@@ -27,6 +34,11 @@ public class MessagesServiceImpl implements MessagesService {
         System.out.println("___________________________________________________________________");
 
         String answer = scanner.nextLine();
+        if(Objects.equals(answer, "ScoreBoard")){
+            PlayerService playerService = new PlayerServiceImpl();
+            getScoreBoard(playerService);
+            System.exit(0);
+        }
         return answer;
     }
 
